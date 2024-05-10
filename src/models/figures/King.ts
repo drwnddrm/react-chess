@@ -13,9 +13,28 @@ export class King extends Figure {
   }
 
   canMove(target: Cell): boolean {
-    if(!super.canMove(target)) {
+    if(!super.canMove(target))
       return false;
+
+    const dx = Math.abs(this.cell.x - target.x);
+    const dy = Math.abs(this.cell.y - target.y);
+
+    if(target.y === this.cell.y
+      && (target.x === this.cell.x + 1 || target.x === this.cell.x - 1)) {
+      return true;
     }
-    return true
+
+    if(target.x === this.cell.x
+      && (target.y === this.cell.y + 1 || target.y === this.cell.y - 1)) {
+      return true;
+    }
+
+    if((dx && dy === 1) 
+      && (target.y === this.cell.y + 1 || target.y === this.cell.y - 1)
+      && (target.x === this.cell.x + 1 || target.x === this.cell.x - 1)){
+      return true;
+    }
+
+    return false;
   }
 }
